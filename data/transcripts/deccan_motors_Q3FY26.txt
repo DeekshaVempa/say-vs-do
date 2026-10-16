@@ -1,0 +1,13 @@
+Company: Deccan Motors
+Period: Q3FY26
+Call: Q3 FY26 earnings call
+Date: 2026-01-27
+Note: Synthetic transcript excerpt created for this prototype. Not a real company.
+
+Chairman: Festive demand was good but not as strong as we hoped. We still believe FY26 volume growth will be at least 10 percent.
+
+CFO: Q4 EBITDA margin should be in the 12.5 to 13.5 percent range.
+
+Analyst: Any update on the EV launch timeline?
+
+Chairman: The launch moved by one quarter because of a supplier delay.

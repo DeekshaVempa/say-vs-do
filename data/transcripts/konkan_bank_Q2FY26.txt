@@ -1,0 +1,11 @@
+Company: Konkan Bank
+Period: Q2FY26
+Call: Q2 FY26 earnings call
+Date: 2025-10-20
+Note: Synthetic transcript excerpt created for this prototype. Not a real company.
+
+MD and CEO: Corporate credit demand was softer than we expected, so we are recalibrating our plans.
+
+CFO: Loan growth for FY26 will now be around 15 percent. On asset quality, we see gross NPA improving further in Q3. NIM came in lower this quarter because deposit repricing lagged the rate cuts.
+
+Analyst: Understood, thank you.

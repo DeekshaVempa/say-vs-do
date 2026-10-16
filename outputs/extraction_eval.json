@@ -1,0 +1,47 @@
+{
+  "gold_statements": 28,
+  "predicted_statements": 30,
+  "matched": 28,
+  "recall": 1.0,
+  "precision": 0.93,
+  "fully_correct_records": 26,
+  "field_accuracy": {
+    "metric": 0.96,
+    "type": 0.96,
+    "target_period": 0.96,
+    "low": 1.0,
+    "high": 1.0,
+    "value": 1.0,
+    "direction": 0.96,
+    "reference_period": 0.96
+  },
+  "quote_verified_rate": 1.0,
+  "json_parse_failures": 0,
+  "truncated_responses": 0,
+  "avg_latency_s": 2.19,
+  "input_tokens": 11495,
+  "output_tokens": 3145,
+  "estimated_cost_usd": 0.0544,
+  "score_comparison": [
+    {
+      "company": "Aravali Infotech",
+      "credibility_score_gold": 0.88,
+      "credibility_score_llm": 0.88
+    },
+    {
+      "company": "Sahyadri Cement",
+      "credibility_score_gold": 0.57,
+      "credibility_score_llm": 0.57
+    },
+    {
+      "company": "Konkan Bank",
+      "credibility_score_gold": 0.5,
+      "credibility_score_llm": 0.5
+    },
+    {
+      "company": "Deccan Motors",
+      "credibility_score_gold": 0.25,
+      "credibility_score_llm": 0.14
+    }
+  ]
+}

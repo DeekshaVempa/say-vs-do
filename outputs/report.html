@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Say vs Do: management credibility scores</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,500;1,400&family=Public+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F6F7F9; --ink: #17202B; --muted: #5F6875; --rule: #D9DDE3;
+    --kept: #2E7D5B; --missed: #C2452D; --vague: #A9B0BA; --panel: #FFFFFF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12161C; --ink: #E6E9EE; --muted: #9AA3AF; --rule: #2A313B;
+      --kept: #5BBF93; --missed: #E9785F; --vague: #5C6470; --panel: #181D24;
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.5 "Public Sans", system-ui, sans-serif; }
+  main { max-width: 1040px; margin: 0 auto; padding: 48px 24px 80px; }
+  h1 { font: 500 2.6rem/1.1 "Newsreader", Georgia, serif; margin: 0 0 12px; }
+  h2 { font: 500 1.5rem/1.2 "Newsreader", Georgia, serif; margin: 56px 0 16px; }
+  h3 { font-size: 1.05rem; margin: 32px 0 8px; }
+  .lede { max-width: 68ch; color: var(--muted); margin: 0; }
+  .note { font-size: .85rem; color: var(--muted); margin-top: 16px; }
+  .scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: var(--panel); }
+  th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  thead th { font-size: .8rem; font-weight: 600; color: var(--muted); }
+  .board td, .board th[scope=row] { vertical-align: middle; }
+  .score { font: 500 1.6rem/1 "Newsreader", Georgia, serif; }
+  .strip { white-space: nowrap; }
+  .dot { display: inline-block; width: 16px; height: 16px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+  .dot.kept { background: var(--kept); }
+  .dot.missed { border: 2px solid var(--missed); }
+  .dot.vague, .dot.no_data, .dot.unverified_quote, .dot.incomplete { width: 8px; height: 8px; background: var(--vague); }
+  q { font: italic 400 1.05rem/1.45 "Newsreader", Georgia, serif; }
+  .src { display: block; font-size: .75rem; color: var(--muted); margin-top: 4px; }
+  .verdict { font-weight: 600; font-size: .9rem; }
+  .verdict.kept { color: var(--kept); }
+  .verdict.missed { color: var(--missed); }
+  .verdict.vague, .verdict.no_data, .verdict.unverified_quote, .verdict.incomplete { color: var(--muted); font-weight: 400; }
+  .legend { font-size: .85rem; color: var(--muted); margin: 10px 0 0; }
+  .legend .dot { margin-left: 12px; }
+  .legend .dot:first-child { margin-left: 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Who keeps their word?</h1>
+  <p class="lede">Every forward-looking promise management made on an earnings call, checked against what the company reported later.
+  The credibility score is the share of measurable promises kept, smoothed so that a company with only a few promises does not look perfect by luck.</p>
+  <p class="note">Guidance source: hand-labeled guidance. Companies, transcripts and results are synthetic, built to demonstrate the method.</p>
+
+  <h2>Scoreboard</h2>
+  <div class="scroll">
+  <table class="board">
+    <thead><tr><th>Company</th><th>Promises in call order</th><th>Kept</th><th>Credibility</th><th>Avg gap vs target</th></tr></thead>
+    <tbody>
+        <tr>
+          <th scope="row">Aravali Infotech</th>
+          <td class="strip"><span class="dot vague" title="Q1FY26: We remain confident about the demand environment (vague)"></span><span class="dot kept" title="Q1FY26: we expect revenue growth for FY26 to be in the range of 6 to 8 percent in constant currency (kept)"></span><span class="dot kept" title="Q1FY26: EBIT margin for Q2 should be at least 21 percent (kept)"></span><span class="dot kept" title="Q2FY26: we are narrowing FY26 revenue growth guidance to 7 to 8 percent (kept)"></span><span class="dot kept" title="Q2FY26: margins in Q3 will dip slightly, but EBIT margin should stay above 20.5 percent (kept)"></span><span class="dot vague" title="Q3FY26: We expect our AI deal pipeline to keep getting stronger next year (vague)"></span><span class="dot kept" title="Q3FY26: We expect Q4 EBIT margin to recover from Q3 levels (kept)"></span><span class="dot kept" title="Q3FY26: we expect FY26 revenue growth to land around 7.5 percent in constant currency (kept)"></span></td>
+          <td>6 of 6</td>
+          <td class="score" style="color:#2E7D5B">0.88</td>
+          <td>+0.22 pp</td>
+        </tr>
+        <tr>
+          <th scope="row">Sahyadri Cement</th>
+          <td class="strip"><span class="dot vague" title="Q1FY26: Pricing discipline in the south remains encouraging and we expect it to hold (vague)"></span><span class="dot missed" title="Q1FY26: Capacity utilization should be around 75 percent in Q2 (missed)"></span><span class="dot kept" title="Q1FY26: EBITDA margin for FY26 should be in the 18 to 20 percent band (kept)"></span><span class="dot kept" title="Q2FY26: Utilization will improve in Q3 after the monsoon (kept)"></span><span class="dot kept" title="Q3FY26: Q4 utilization should be at least 85 percent (kept)"></span><span class="dot missed" title="Q3FY26: Q4 EBITDA margin will be lower than Q3 (missed)"></span></td>
+          <td>3 of 5</td>
+          <td class="score" style="color:#B7862B">0.57</td>
+          <td>-1.10 pp</td>
+        </tr>
+        <tr>
+          <th scope="row">Konkan Bank</th>
+          <td class="strip"><span class="dot missed" title="Q1FY26: For FY26, we are guiding for loan growth of 16 to 18 percent (missed)"></span><span class="dot kept" title="Q1FY26: gross NPA should come down below 2.5 percent by end of Q2 (kept)"></span><span class="dot missed" title="Q1FY26: NIM should be stable at around 3.6 percent for Q2 (missed)"></span><span class="dot kept" title="Q2FY26: Loan growth for FY26 will now be around 15 percent (kept)"></span><span class="dot kept" title="Q2FY26: we see gross NPA improving further in Q3 (kept)"></span><span class="dot vague" title="Q3FY26: Asset quality trends remain healthy and we expect them to stay that way (vague)"></span><span class="dot missed" title="Q3FY26: NIM for Q4 should be at least 3.5 percent (missed)"></span></td>
+          <td>3 of 6</td>
+          <td class="score" style="color:#B7862B">0.50</td>
+          <td>-0.46 pp</td>
+        </tr>
+        <tr>
+          <th scope="row">Deccan Motors</th>
+          <td class="strip"><span class="dot vague" title="Q1FY26: The new EV platform will be a game changer for us (vague)"></span><span class="dot missed" title="Q1FY26: We are targeting double-digit volume growth for FY26, at least 12 percent (missed)"></span><span class="dot missed" title="Q1FY26: EBITDA margin in Q2 should expand to 13 percent (missed)"></span><span class="dot missed" title="Q2FY26: the festive season will drive Q3 volume growth of 15 to 18 percent (missed)"></span><span class="dot kept" title="Q2FY26: Margins will improve in Q3 from Q2 levels (kept)"></span><span class="dot missed" title="Q3FY26: We still believe FY26 volume growth will be at least 10 percent (missed)"></span><span class="dot missed" title="Q3FY26: Q4 EBITDA margin should be in the 12.5 to 13.5 percent range (missed)"></span></td>
+          <td>1 of 6</td>
+          <td class="score" style="color:#C2452D">0.25</td>
+          <td>-3.20 pp</td>
+        </tr></tbody>
+  </table>
+  </div>
+  <p class="legend"><span class="dot kept"></span>Kept <span class="dot missed"></span>Missed <span class="dot vague"></span>Not measurable. Hover a dot to read the quote.</p>
+
+  <h2>Every promise, with its source</h2>
+  
+      <section>
+        <h3>Aravali Infotech</h3>
+        <div class="scroll">
+        <table class="detail">
+          <thead><tr><th>Said on</th><th>What management said</th><th>For</th><th>Promise</th><th>Reported</th><th>Result</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Q1FY26 call<span class="src">2025-07-14</span></td>
+              <td><q>We remain confident about the demand environment</q><span class="src">aravali_infotech_Q1FY26.txt</span></td>
+              <td>n/a</td>
+              <td>no measurable target</td>
+              <td>n/a<span class="src"></span></td>
+              <td><span class="verdict vague">Not measurable</span></td>
+            </tr>
+            <tr>
+              <td>Q1FY26 call<span class="src">2025-07-14</span></td>
+              <td><q>we expect revenue growth for FY26 to be in the range of 6 to 8 percent in constant currency</q><span class="src">aravali_infotech_Q1FY26.txt</span></td>
+              <td>FY26</td>
+              <td>6 to 8%</td>
+              <td>7.4%<span class="src">FY26 annual results (synthetic)</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q1FY26 call<span class="src">2025-07-14</span></td>
+              <td><q>EBIT margin for Q2 should be at least 21 percent</q><span class="src">aravali_infotech_Q1FY26.txt</span></td>
+              <td>Q2FY26</td>
+              <td>at least 21%</td>
+              <td>21.6%<span class="src">Q2FY26 results release (synthetic)</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q2FY26 call<span class="src">2025-10-13</span></td>
+              <td><q>we are narrowing FY26 revenue growth guidance to 7 to 8 percent</q><span class="src">aravali_infotech_Q2FY26.txt</span></td>
+              <td>FY26</td>
+              <td>7 to 8%</td>
+              <td>7.4%<span class="src">FY26 annual results (synthetic)</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q2FY26 call<span class="src">2025-10-13</span></td>
+              <td><q>margins in Q3 will dip slightly, but EBIT margin should stay above 20.5 percent</q><span class="src">aravali_infotech_Q2FY26.txt</span></td>
+              <td>Q3FY26</td>
+              <td>at least 20.5%</td>
+              <td>20.8%<span class="src">Q3FY26 results release (synthetic)</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q3FY26 call<span class="src">2026-01-12</span></td>
+              <td><q>We expect our AI deal pipeline to keep getting stronger next year</q><span class="src">aravali_infotech_Q3FY26.txt</span></td>
+              <td>n/a</td>
+              <td>no measurable target</td>
+              <td>n/a<span class="src"></span></td>
+              <td><span class="verdict vague">Not measurable</span></td>
+            </tr>
+            <tr>
+              <td>Q3FY26 call<span class="src">2026-01-12</span></td>
+              <td><q>We expect Q4 EBIT margin to recover from Q3 levels</q><span class="src">aravali_infotech_Q3FY26.txt</span></td>
+              <td>Q4FY26</td>
+              <td>higher than Q3FY26 (20.8%)</td>
+              <td>21.3%<span class="src">Q4FY26 results release (synthetic)</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q3FY26 call<span class="src">2026-01-12</span></td>
+              <td><q>we expect FY26 revenue growth to land around 7.5 percent in constant currency</q><span class="src">aravali_infotech_Q3FY26.txt</span></td>
+              <td>FY26</td>
+              <td>around 7.5%</td>
+              <td>7.4%<span class="src">FY26 annual results (synthetic)</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr></tbody>
+        </table>
+        </div>
+      </section>
+      <section>
+        <h3>Sahyadri Cement</h3>
+        <div class="scroll">
+        <table class="detail">
+          <thead><tr><th>Said on</th><th>What management said</th><th>For</th><th>Promise</th><th>Reported</th><th>Result</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Q1FY26 call<span class="src">2025-07-24</span></td>
+              <td><q>Pricing discipline in the south remains encouraging and we expect it to hold</q><span class="src">sahyadri_cement_Q1FY26.txt</span></td>
+              <td>n/a</td>
+              <td>no measurable target</td>
+              <td>n/a<span class="src"></span></td>
+              <td><span class="verdict vague">Not measurable</span></td>
+            </tr>
+            <tr>
+              <td>Q1FY26 call<span class="src">2025-07-24</span></td>
+              <td><q>Capacity utilization should be around 75 percent in Q2</q><span class="src">sahyadri_cement_Q1FY26.txt</span></td>
+              <td>Q2FY26</td>
+              <td>around 75%</td>
+              <td>71.0%<span class="src">Q2FY26 results release (synthetic)</span></td>
+              <td><span class="verdict missed">Missed</span></td>
+            </tr>
+            <tr>
+              <td>Q1FY26 call<span class="src">2025-07-24</span></td>
+              <td><q>EBITDA margin for FY26 should be in the 18 to 20 percent band</q><span class="src">sahyadri_cement_Q1FY26.txt</span></td>
+              <td>FY26</td>
+              <td>18 to 20%</td>
+              <td>18.7%<span class="src">FY26 annual results (synthetic)</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q2FY26 call<span class="src">2025-10-23</span></td>
+              <td><q>Utilization will improve in Q3 after the monsoon</q><span class="src">sahyadri_cement_Q2FY26.txt</span></td>
+              <td>Q3FY26</td>
+              <td>higher than Q2FY26 (71.0%)</td>
+              <td>80.0%<span class="src">Q3FY26 results release (synthetic)</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q3FY26 call<span class="src">2026-01-22</span></td>
+              <td><q>Q4 utilization should be at least 85 percent</q><span class="src">sahyadri_cement_Q3FY26.txt</span></td>
+              <td>Q4FY26</td>
+              <td>at least 85%</td>
+              <td>86.0%<span class="src">Q4FY26 results release (synthetic)</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q3FY26 call<span class="src">2026-01-22</span></td>
+              <td><q>Q4 EBITDA margin will be lower than Q3</q><span class="src">sahyadri_cement_Q3FY26.txt</span></td>
+              <td>Q4FY26</td>
+              <td>lower than Q3FY26 (19.4%)</td>
+              <td>19.9%<span class="src">Q4FY26 results release (synthetic)</span></td>
+              <td><span class="verdict missed">Missed</span></td>
+            </tr></tbody>
+        </table>
+        </div>
+      </section>
+      <section>
+        <h3>Konkan Bank</h3>
+        <div class="scroll">
+        <table class="detail">
+          <thead><tr><th>Said on</th><th>What management said</th><th>For</th><th>Promise</th><th>Reported</th><th>Result</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Q1FY26 call<span class="src">2025-07-21</span></td>
+              <td><q>For FY26, we are guiding for loan growth of 16 to 18 percent</q><span class="src">konkan_bank_Q1FY26.txt</span></td>
+              <td>FY26</td>
+              <td>16 to 18%</td>
+              <td>14.9%<span class="src">FY26 annual results (synthetic)</span></td>
+              <td><span class="verdict missed">Missed</span></td>
+            </tr>
+            <tr>
+              <td>Q1FY26 call<span class="src">2025-07-21</span></td>
+              <td><q>gross NPA should come down below 2.5 percent by end of Q2</q><span class="src">konkan_bank_Q1FY26.txt</span></td>
+              <td>Q2FY26</td>
+              <td>at most 2.5%</td>
+              <td>2.41%<span class="src">Q2FY26 results release (synthetic)</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q1FY26 call<span class="src">2025-07-21</span></td>
+              <td><q>NIM should be stable at around 3.6 percent for Q2</q><span class="src">konkan_bank_Q1FY26.txt</span></td>
+              <td>Q2FY26</td>
+              <td>around 3.6%</td>
+              <td>3.48%<span class="src">Q2FY26 results release (synthetic)</span></td>
+              <td><span class="verdict missed">Missed</span></td>
+            </tr>
+            <tr>
+              <td>Q2FY26 call<span class="src">2025-10-20</span></td>
+              <td><q>Loan growth for FY26 will now be around 15 percent</q><span class="src">konkan_bank_Q2FY26.txt</span></td>
+              <td>FY26</td>
+              <td>around 15%</td>
+              <td>14.9%<span class="src">FY26 annual results (synthetic)</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q2FY26 call<span class="src">2025-10-20</span></td>
+              <td><q>we see gross NPA improving further in Q3</q><span class="src">konkan_bank_Q2FY26.txt</span></td>
+              <td>Q3FY26</td>
+              <td>lower than Q2FY26 (2.41%)</td>
+              <td>2.38%<span class="src">Q3FY26 results release (synthetic)</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q3FY26 call<span class="src">2026-01-19</span></td>
+              <td><q>Asset quality trends remain healthy and we expect them to stay that way</q><span class="src">konkan_bank_Q3FY26.txt</span></td>
+              <td>n/a</td>
+              <td>no measurable target</td>
+              <td>n/a<span class="src"></span></td>
+              <td><span class="verdict vague">Not measurable</span></td>
+            </tr>
+            <tr>
+              <td>Q3FY26 call<span class="src">2026-01-19</span></td>
+              <td><q>NIM for Q4 should be at least 3.5 percent</q><span class="src">konkan_bank_Q3FY26.txt</span></td>
+              <td>Q4FY26</td>
+              <td>at least 3.5%</td>
+              <td>3.44%<span class="src">Q4FY26 results release (synthetic)</span></td>
+              <td><span class="verdict missed">Missed</span></td>
+            </tr></tbody>
+        </table>
+        </div>
+      </section>
+      <section>
+        <h3>Deccan Motors</h3>
+        <div class="scroll">
+        <table class="detail">
+          <thead><tr><th>Said on</th><th>What management said</th><th>For</th><th>Promise</th><th>Reported</th><th>Result</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Q1FY26 call<span class="src">2025-07-28</span></td>
+              <td><q>The new EV platform will be a game changer for us</q><span class="src">deccan_motors_Q1FY26.txt</span></td>
+              <td>n/a</td>
+              <td>no measurable target</td>
+              <td>n/a<span class="src"></span></td>
+              <td><span class="verdict vague">Not measurable</span></td>
+            </tr>
+            <tr>
+              <td>Q1FY26 call<span class="src">2025-07-28</span></td>
+              <td><q>We are targeting double-digit volume growth for FY26, at least 12 percent</q><span class="src">deccan_motors_Q1FY26.txt</span></td>
+              <td>FY26</td>
+              <td>at least 12%</td>
+              <td>6.8%<span class="src">FY26 annual results (synthetic)</span></td>
+              <td><span class="verdict missed">Missed</span></td>
+            </tr>
+            <tr>
+              <td>Q1FY26 call<span class="src">2025-07-28</span></td>
+              <td><q>EBITDA margin in Q2 should expand to 13 percent</q><span class="src">deccan_motors_Q1FY26.txt</span></td>
+              <td>Q2FY26</td>
+              <td>around 13%</td>
+              <td>11.6%<span class="src">Q2FY26 results release (synthetic)</span></td>
+              <td><span class="verdict missed">Missed</span></td>
+            </tr>
+            <tr>
+              <td>Q2FY26 call<span class="src">2025-10-27</span></td>
+              <td><q>the festive season will drive Q3 volume growth of 15 to 18 percent</q><span class="src">deccan_motors_Q2FY26.txt</span></td>
+              <td>Q3FY26</td>
+              <td>15 to 18%</td>
+              <td>11.2%<span class="src">Q3FY26 results release (synthetic)</span></td>
+              <td><span class="verdict missed">Missed</span></td>
+            </tr>
+            <tr>
+              <td>Q2FY26 call<span class="src">2025-10-27</span></td>
+              <td><q>Margins will improve in Q3 from Q2 levels</q><span class="src">deccan_motors_Q2FY26.txt</span></td>
+              <td>Q3FY26</td>
+              <td>higher than Q2FY26 (11.6%)</td>
+              <td>11.9%<span class="src">Q3FY26 results release (synthetic)</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q3FY26 call<span class="src">2026-01-27</span></td>
+              <td><q>We still believe FY26 volume growth will be at least 10 percent</q><span class="src">deccan_motors_Q3FY26.txt</span></td>
+              <td>FY26</td>
+              <td>at least 10%</td>
+              <td>6.8%<span class="src">FY26 annual results (synthetic)</span></td>
+              <td><span class="verdict missed">Missed</span></td>
+            </tr>
+            <tr>
+              <td>Q3FY26 call<span class="src">2026-01-27</span></td>
+              <td><q>Q4 EBITDA margin should be in the 12.5 to 13.5 percent range</q><span class="src">deccan_motors_Q3FY26.txt</span></td>
+              <td>Q4FY26</td>
+              <td>12.5 to 13.5%</td>
+              <td>12.1%<span class="src">Q4FY26 results release (synthetic)</span></td>
+              <td><span class="verdict missed">Missed</span></td>
+            </tr></tbody>
+        </table>
+        </div>
+      </section>
+</main>
+</body>
+</html>

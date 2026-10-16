@@ -1,0 +1,13 @@
+Company: Konkan Bank
+Period: Q3FY26
+Call: Q3 FY26 earnings call
+Date: 2026-01-19
+Note: Synthetic transcript excerpt created for this prototype. Not a real company.
+
+MD and CEO: Asset quality trends remain healthy and we expect them to stay that way.
+
+CFO: We believe deposit costs have peaked. NIM for Q4 should be at least 3.5 percent.
+
+Analyst: Any change to the branch expansion plan?
+
+MD and CEO: No change. We opened 40 branches this quarter, in line with plan.

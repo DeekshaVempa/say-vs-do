@@ -1,0 +1,11 @@
+Company: Sahyadri Cement
+Period: Q1FY26
+Call: Q1 FY26 earnings call
+Date: 2025-07-24
+Note: Synthetic transcript excerpt created for this prototype. Not a real company.
+
+MD: Pricing discipline in the south remains encouraging and we expect it to hold.
+
+CFO: Capacity utilization should be around 75 percent in Q2, even with the monsoon. EBITDA margin for FY26 should be in the 18 to 20 percent band.
+
+Analyst: Thank you for the detail.

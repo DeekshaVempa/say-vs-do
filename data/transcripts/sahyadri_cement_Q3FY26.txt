@@ -1,0 +1,11 @@
+Company: Sahyadri Cement
+Period: Q3FY26
+Call: Q3 FY26 earnings call
+Date: 2026-01-22
+Note: Synthetic transcript excerpt created for this prototype. Not a real company.
+
+MD: Construction activity picked up sharply after the monsoon.
+
+CFO: Q4 utilization should be at least 85 percent. Q4 EBITDA margin will be lower than Q3 because of higher fuel costs.
+
+Analyst: Thank you.

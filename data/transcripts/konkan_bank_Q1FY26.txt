@@ -1,0 +1,13 @@
+Company: Konkan Bank
+Period: Q1FY26
+Call: Q1 FY26 earnings call
+Date: 2025-07-21
+Note: Synthetic transcript excerpt created for this prototype. Not a real company.
+
+MD and CEO: Deposits grew faster than the system this quarter and our retail franchise continues to deepen.
+
+CFO: For FY26, we are guiding for loan growth of 16 to 18 percent. Recoveries are strong, and gross NPA should come down below 2.5 percent by end of Q2. On margins, NIM should be stable at around 3.6 percent for Q2 even after the rate cuts.
+
+Analyst: How do you feel about unsecured lending?
+
+MD and CEO: We tightened underwriting there last year and are comfortable with our current exposure.

@@ -1,0 +1,13 @@
+Company: Deccan Motors
+Period: Q1FY26
+Call: Q1 FY26 earnings call
+Date: 2025-07-28
+Note: Synthetic transcript excerpt created for this prototype. Not a real company.
+
+Chairman: The new EV platform will be a game changer for us.
+
+CFO: We are targeting double-digit volume growth for FY26, at least 12 percent. With softer commodity costs, EBITDA margin in Q2 should expand to 13 percent.
+
+Analyst: What is the dealer inventory situation?
+
+CFO: Dealer inventory is at about 30 days, which we consider healthy.

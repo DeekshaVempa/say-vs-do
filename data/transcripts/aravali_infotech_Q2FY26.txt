@@ -1,0 +1,13 @@
+Company: Aravali Infotech
+Period: Q2FY26
+Call: Q2 FY26 earnings call
+Date: 2025-10-13
+Note: Synthetic transcript excerpt created for this prototype. Not a real company.
+
+CEO: Q2 came in ahead of our internal plan, helped by two large deal ramp ups in Europe.
+
+CFO: Given the visibility we now have, we are narrowing FY26 revenue growth guidance to 7 to 8 percent. Q3 has the usual furloughs, so margins in Q3 will dip slightly, but EBIT margin should stay above 20.5 percent.
+
+Analyst: Is pricing under any pressure?
+
+CEO: Pricing is stable. Clients are asking for productivity benefits, and we have already built those into our plans.

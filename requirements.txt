@@ -1,0 +1,4 @@
+pandas>=2.0
+matplotlib>=3.7
+anthropic>=0.125  # only needed for: python run.py --use-llm (needs output_config support)
+pytest>=7.0       # only needed to run the tests

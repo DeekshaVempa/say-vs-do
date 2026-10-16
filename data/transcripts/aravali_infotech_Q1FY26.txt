@@ -1,0 +1,13 @@
+Company: Aravali Infotech
+Period: Q1FY26
+Call: Q1 FY26 earnings call
+Date: 2025-07-14
+Note: Synthetic transcript excerpt created for this prototype. Not a real company.
+
+CEO: Thank you all for joining. Q1 was a steady quarter with growth across our top three verticals. We remain confident about the demand environment, especially with banking and retail clients.
+
+CFO: On the outlook, we expect revenue growth for FY26 to be in the range of 6 to 8 percent in constant currency. Wage hikes are deferred to Q3 this year, so EBIT margin for Q2 should be at least 21 percent.
+
+Analyst: Any color on deal closures this quarter?
+
+CEO: Deal closures were healthy and the pipeline is broad based. We did not see any material cancellations.

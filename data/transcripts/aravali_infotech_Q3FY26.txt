@@ -1,0 +1,11 @@
+Company: Aravali Infotech
+Period: Q3FY26
+Call: Q3 FY26 earnings call
+Date: 2026-01-12
+Note: Synthetic transcript excerpt created for this prototype. Not a real company.
+
+CEO: Despite seasonal weakness, we signed our largest ever AI-led transformation deal this quarter. We expect our AI deal pipeline to keep getting stronger next year.
+
+CFO: Furloughs were in line with expectations. We expect Q4 EBIT margin to recover from Q3 levels as utilization normalizes. For the full year, we expect FY26 revenue growth to land around 7.5 percent in constant currency.
+
+Analyst: Thank you, that is helpful.

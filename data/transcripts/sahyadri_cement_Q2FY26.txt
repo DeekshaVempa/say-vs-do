@@ -1,0 +1,11 @@
+Company: Sahyadri Cement
+Period: Q2FY26
+Call: Q2 FY26 earnings call
+Date: 2025-10-23
+Note: Synthetic transcript excerpt created for this prototype. Not a real company.
+
+MD: The monsoon was longer than usual this year. Utilization will improve in Q3 after the monsoon.
+
+CFO: Freight costs were flat quarter on quarter. We are also evaluating a few acquisition targets in the east.
+
+Analyst: Understood.
