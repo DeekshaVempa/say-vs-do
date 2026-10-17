@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Say vs Do: management credibility scores</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,500;1,400&family=Public+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F6F7F9; --ink: #17202B; --muted: #5F6875; --rule: #D9DDE3;
+    --kept: #2E7D5B; --missed: #C2452D; --vague: #A9B0BA; --panel: #FFFFFF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12161C; --ink: #E6E9EE; --muted: #9AA3AF; --rule: #2A313B;
+      --kept: #5BBF93; --missed: #E9785F; --vague: #5C6470; --panel: #181D24;
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.5 "Public Sans", system-ui, sans-serif; }
+  main { max-width: 1040px; margin: 0 auto; padding: 48px 24px 80px; }
+  h1 { font: 500 2.6rem/1.1 "Newsreader", Georgia, serif; margin: 0 0 12px; }
+  h2 { font: 500 1.5rem/1.2 "Newsreader", Georgia, serif; margin: 56px 0 16px; }
+  h3 { font-size: 1.05rem; margin: 32px 0 8px; }
+  .lede { max-width: 68ch; color: var(--muted); margin: 0; }
+  .note { font-size: .85rem; color: var(--muted); margin-top: 16px; }
+  .scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: var(--panel); }
+  th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  thead th { font-size: .8rem; font-weight: 600; color: var(--muted); }
+  .board td, .board th[scope=row] { vertical-align: middle; }
+  .score { font: 500 1.6rem/1 "Newsreader", Georgia, serif; }
+  .strip { white-space: nowrap; }
+  .dot { display: inline-block; width: 16px; height: 16px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+  .dot.kept { background: var(--kept); }
+  .dot.missed { border: 2px solid var(--missed); }
+  .dot.beat { border: 4px solid var(--kept); }
+  .dot.vague, .dot.no_data, .dot.unverified_quote, .dot.incomplete { width: 8px; height: 8px; background: var(--vague); }
+  q { font: italic 400 1.05rem/1.45 "Newsreader", Georgia, serif; }
+  .src { display: block; font-size: .75rem; color: var(--muted); margin-top: 4px; }
+  .verdict { font-weight: 600; font-size: .9rem; }
+  .verdict.kept, .verdict.beat { color: var(--kept); }
+  .verdict.missed { color: var(--missed); }
+  .verdict.vague, .verdict.no_data, .verdict.unverified_quote, .verdict.incomplete { color: var(--muted); font-weight: 400; }
+  .legend { font-size: .85rem; color: var(--muted); margin: 10px 0 0; }
+  .legend .dot { margin-left: 12px; }
+  .legend .dot:first-child { margin-left: 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Who keeps their word?</h1>
+  <p class="lede">Every forward-looking promise management made on an earnings call, checked against what the company reported later.
+  The credibility score is the share of measurable promises kept, smoothed so that a company with only a few promises does not look perfect by luck.</p>
+  <p class="note">Guidance source: hand-labeled guidance. Transcripts and reported results are real, taken from the company&#x27;s SEC filings.</p>
+
+  <h2>Scoreboard</h2>
+  <div class="scroll">
+  <table class="board">
+    <thead><tr><th>Company</th><th>Promises in call order</th><th>Kept</th><th>Credibility</th><th>Avg gap vs target</th></tr></thead>
+    <tbody>
+        <tr>
+          <th scope="row">Infosys</th>
+          <td class="strip"><span class="dot beat" title="Q1FY25: Given our strong performance in Q1 and our current outlook, we have revised our revenue growth guidance for the full financial year to 3% to 4% growth in constant currency. (beat)"></span><span class="dot kept" title="Q1FY25: Our operating margin guidance for the financial year remains at 20% to 22%. (kept)"></span><span class="dot beat" title="Q1FY26: From the earlier guidance of 0% to 3%, now it is 1% to 3% growth in constant currency terms. (beat)"></span><span class="dot kept" title="Q1FY26: Our margin guidance remains unchanged at 20% to 22%. (kept)"></span><span class="dot kept" title="Q2FY25: The new guidance is 3.75% to 4.5% growth in constant currency. (kept)"></span><span class="dot kept" title="Q2FY25: Our operating margin guidance for the financial year remains the same at 20% to 22%. (kept)"></span><span class="dot beat" title="Q2FY26: The new guidance is 2% to 3% growth in constant currency terms. (beat)"></span><span class="dot kept" title="Q2FY26: Our operating margin guidance for the financial year remains the same at 20% to 22%. (kept)"></span><span class="dot missed" title="Q3FY25: we are revising our revenue growth guidance to growth of 4.5% to 5% in constant currency. (missed)"></span><span class="dot kept" title="Q3FY25: Our operating margin guidance remains unchanged at 20% to 22%. (kept)"></span><span class="dot kept" title="Q3FY26: The new revenue growth guidance for this financial year is 3% to 3.5% growth in constant currency. (kept)"></span><span class="dot kept" title="Q3FY26: Our operating margin guidance for the financial year remains the same at 20% to 22%. (kept)"></span><span class="dot beat" title="Q4FY24: With that, our revenue growth guidance for FY &#x27;25 is 1% to 3% growth in constant currency. (beat)"></span><span class="dot kept" title="Q4FY24: Our operating margin guidance for FY &#x27;25 is 20% to 22%. (kept)"></span><span class="dot beat" title="Q4FY25: our guidance for growth for financial year &#x27;26 is 0% to 3% in constant currency terms. (beat)"></span><span class="dot kept" title="Q4FY25: Our margin guidance for financial year 2026 is 20% to 22%. (kept)"></span><span class="dot no_data" title="Q4FY26: Our revenue growth guidance of financial year &#x27;27 is 1.5% to 3.5% year-on-year in constant currency terms. (no_data)"></span><span class="dot no_data" title="Q4FY26: Our operating margin guidance for financial year &#x27;27 is 20% to 22%. (no_data)"></span></td>
+          <td>10 of 16<span class="src">5 beat, 1 missed</span></td>
+          <td class="score" style="color:#B7862B">0.61</td>
+          <td>+0.37 pp</td>
+        </tr></tbody>
+  </table>
+  </div>
+  <p class="legend"><span class="dot kept"></span>Kept <span class="dot beat"></span>Beat (missed, but on the good side) <span class="dot missed"></span>Missed <span class="dot vague"></span>Not measurable. Hover a dot to read the quote.</p>
+
+  <h2>Every promise, with its source</h2>
+  
+      <section>
+        <h3>Infosys</h3>
+        <div class="scroll">
+        <table class="detail">
+          <thead><tr><th>Said on</th><th>What management said</th><th>For</th><th>Promise</th><th>Reported</th><th>Result</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Q1FY25 call<span class="src">2024-07-18</span></td>
+              <td><q>Given our strong performance in Q1 and our current outlook, we have revised our revenue growth guidance for the full financial year to 3% to 4% growth in constant currency.</q><span class="src">infosys_Q1FY25.txt</span></td>
+              <td>FY25</td>
+              <td>3 to 4%</td>
+              <td>4.2%<span class="src">Q4 FY25 press release, revenue growth in constant currency</span></td>
+              <td><span class="verdict beat">Beat</span></td>
+            </tr>
+            <tr>
+              <td>Q1FY25 call<span class="src">2024-07-18</span></td>
+              <td><q>Our operating margin guidance for the financial year remains at 20% to 22%.</q><span class="src">infosys_Q1FY25.txt</span></td>
+              <td>FY25</td>
+              <td>20 to 22%</td>
+              <td>21.1%<span class="src">Q4 FY25 press release, operating margin</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q1FY26 call<span class="src">2025-07-23</span></td>
+              <td><q>From the earlier guidance of 0% to 3%, now it is 1% to 3% growth in constant currency terms.</q><span class="src">infosys_Q1FY26.txt</span></td>
+              <td>FY26</td>
+              <td>1 to 3%</td>
+              <td>3.1%<span class="src">Q4 FY26 press release, revenue growth in constant currency</span></td>
+              <td><span class="verdict beat">Beat</span></td>
+            </tr>
+            <tr>
+              <td>Q1FY26 call<span class="src">2025-07-23</span></td>
+              <td><q>Our margin guidance remains unchanged at 20% to 22%.</q><span class="src">infosys_Q1FY26.txt</span></td>
+              <td>FY26</td>
+              <td>20 to 22%</td>
+              <td>21.0%<span class="src">Q4 FY26 press release, adjusted operating margin (excludes the one-time Labour Code charge, as the guidance did; reported 20.3%)</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q2FY25 call<span class="src">2024-10-17</span></td>
+              <td><q>The new guidance is 3.75% to 4.5% growth in constant currency.</q><span class="src">infosys_Q2FY25.txt</span></td>
+              <td>FY25</td>
+              <td>3.75 to 4.5%</td>
+              <td>4.2%<span class="src">Q4 FY25 press release, revenue growth in constant currency</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q2FY25 call<span class="src">2024-10-17</span></td>
+              <td><q>Our operating margin guidance for the financial year remains the same at 20% to 22%.</q><span class="src">infosys_Q2FY25.txt</span></td>
+              <td>FY25</td>
+              <td>20 to 22%</td>
+              <td>21.1%<span class="src">Q4 FY25 press release, operating margin</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q2FY26 call<span class="src">2025-10-16</span></td>
+              <td><q>The new guidance is 2% to 3% growth in constant currency terms.</q><span class="src">infosys_Q2FY26.txt</span></td>
+              <td>FY26</td>
+              <td>2 to 3%</td>
+              <td>3.1%<span class="src">Q4 FY26 press release, revenue growth in constant currency</span></td>
+              <td><span class="verdict beat">Beat</span></td>
+            </tr>
+            <tr>
+              <td>Q2FY26 call<span class="src">2025-10-16</span></td>
+              <td><q>Our operating margin guidance for the financial year remains the same at 20% to 22%.</q><span class="src">infosys_Q2FY26.txt</span></td>
+              <td>FY26</td>
+              <td>20 to 22%</td>
+              <td>21.0%<span class="src">Q4 FY26 press release, adjusted operating margin (excludes the one-time Labour Code charge, as the guidance did; reported 20.3%)</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q3FY25 call<span class="src">2025-01-16</span></td>
+              <td><q>we are revising our revenue growth guidance to growth of 4.5% to 5% in constant currency.</q><span class="src">infosys_Q3FY25.txt</span></td>
+              <td>FY25</td>
+              <td>4.5 to 5%</td>
+              <td>4.2%<span class="src">Q4 FY25 press release, revenue growth in constant currency</span></td>
+              <td><span class="verdict missed">Missed</span></td>
+            </tr>
+            <tr>
+              <td>Q3FY25 call<span class="src">2025-01-16</span></td>
+              <td><q>Our operating margin guidance remains unchanged at 20% to 22%.</q><span class="src">infosys_Q3FY25.txt</span></td>
+              <td>FY25</td>
+              <td>20 to 22%</td>
+              <td>21.1%<span class="src">Q4 FY25 press release, operating margin</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q3FY26 call<span class="src">2026-01-14</span></td>
+              <td><q>The new revenue growth guidance for this financial year is 3% to 3.5% growth in constant currency.</q><span class="src">infosys_Q3FY26.txt</span></td>
+              <td>FY26</td>
+              <td>3 to 3.5%</td>
+              <td>3.1%<span class="src">Q4 FY26 press release, revenue growth in constant currency</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q3FY26 call<span class="src">2026-01-14</span></td>
+              <td><q>Our operating margin guidance for the financial year remains the same at 20% to 22%.</q><span class="src">infosys_Q3FY26.txt</span></td>
+              <td>FY26</td>
+              <td>20 to 22%</td>
+              <td>21.0%<span class="src">Q4 FY26 press release, adjusted operating margin (excludes the one-time Labour Code charge, as the guidance did; reported 20.3%)</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q4FY24 call<span class="src">2024-04-18</span></td>
+              <td><q>With that, our revenue growth guidance for FY &#x27;25 is 1% to 3% growth in constant currency.</q><span class="src">infosys_Q4FY24.txt</span></td>
+              <td>FY25</td>
+              <td>1 to 3%</td>
+              <td>4.2%<span class="src">Q4 FY25 press release, revenue growth in constant currency</span></td>
+              <td><span class="verdict beat">Beat</span></td>
+            </tr>
+            <tr>
+              <td>Q4FY24 call<span class="src">2024-04-18</span></td>
+              <td><q>Our operating margin guidance for FY &#x27;25 is 20% to 22%.</q><span class="src">infosys_Q4FY24.txt</span></td>
+              <td>FY25</td>
+              <td>20 to 22%</td>
+              <td>21.1%<span class="src">Q4 FY25 press release, operating margin</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q4FY25 call<span class="src">2025-04-17</span></td>
+              <td><q>our guidance for growth for financial year &#x27;26 is 0% to 3% in constant currency terms.</q><span class="src">infosys_Q4FY25.txt</span></td>
+              <td>FY26</td>
+              <td>0 to 3%</td>
+              <td>3.1%<span class="src">Q4 FY26 press release, revenue growth in constant currency</span></td>
+              <td><span class="verdict beat">Beat</span></td>
+            </tr>
+            <tr>
+              <td>Q4FY25 call<span class="src">2025-04-17</span></td>
+              <td><q>Our margin guidance for financial year 2026 is 20% to 22%.</q><span class="src">infosys_Q4FY25.txt</span></td>
+              <td>FY26</td>
+              <td>20 to 22%</td>
+              <td>21.0%<span class="src">Q4 FY26 press release, adjusted operating margin (excludes the one-time Labour Code charge, as the guidance did; reported 20.3%)</span></td>
+              <td><span class="verdict kept">Kept</span></td>
+            </tr>
+            <tr>
+              <td>Q4FY26 call<span class="src">2026-04-23</span></td>
+              <td><q>Our revenue growth guidance of financial year &#x27;27 is 1.5% to 3.5% year-on-year in constant currency terms.</q><span class="src">infosys_Q4FY26.txt</span></td>
+              <td>FY27</td>
+              <td>1.5 to 3.5%</td>
+              <td>n/a<span class="src"></span></td>
+              <td><span class="verdict no_data">No reported data</span></td>
+            </tr>
+            <tr>
+              <td>Q4FY26 call<span class="src">2026-04-23</span></td>
+              <td><q>Our operating margin guidance for financial year &#x27;27 is 20% to 22%.</q><span class="src">infosys_Q4FY26.txt</span></td>
+              <td>FY27</td>
+              <td>20 to 22%</td>
+              <td>n/a<span class="src"></span></td>
+              <td><span class="verdict no_data">No reported data</span></td>
+            </tr></tbody>
+        </table>
+        </div>
+      </section>
+</main>
+</body>
+</html>

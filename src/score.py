@@ -142,15 +142,23 @@ def score_one(g, actuals):
         return result
 
     result["verdict"] = "kept" if kept else "missed"
+    sign = -1 if g["metric"] in LOWER_IS_BETTER else 1
 
     # Gap vs target in percentage points. Positive means the company did
     # better than promised, negative means it fell short.
     anchor = target_anchor(g)
     if anchor is not None:
-        gap = actual - anchor
-        if g["metric"] in LOWER_IS_BETTER:
-            gap = -gap
+        gap = (actual - anchor) * sign
         result["gap_pp"] = round(gap, 2)
+
+    # Missing a target on the good side is not the same as falling short.
+    # Infosys guides a growth range and then lands above the top of it; a yes
+    # or no rule would call that a miss. It still counts against the
+    # credibility score (the forecast was wrong), but it is reported as a beat.
+    if not kept:
+        better = (actual - reference) * sign if t == "direction" else gap
+        if better > 0:
+            result["verdict"] = "beat"
 
     return result
 
@@ -163,8 +171,9 @@ def company_scoreboard(scored):
     rows = []
     for company, group in scored.groupby("company"):
         kept = int((group["verdict"] == "kept").sum())
+        beat = int((group["verdict"] == "beat").sum())
         missed = int((group["verdict"] == "missed").sum())
-        scorable = kept + missed
+        scorable = kept + beat + missed
 
         # Laplace smoothing: (kept + 1) / (scorable + 2).
         # With so few promises per company, 1 out of 1 should not look as
@@ -176,6 +185,7 @@ def company_scoreboard(scored):
             "company": company,
             "promises_scored": scorable,
             "kept": kept,
+            "beat": beat,
             "missed": missed,
             "vague": int((group["verdict"] == "vague").sum()),
             "no_data": int((group["verdict"] == "no_data").sum()),

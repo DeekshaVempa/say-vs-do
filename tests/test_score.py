@@ -13,11 +13,14 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from src.score import score_one, company_scoreboard
 from src.evaluate import match_records
 from src.extract import parse_json_array, extract_from_transcript
+from src.load import normalize, dedupe_within_call
+from src.fetch_sec import parse_transcript, period_from_date
 
 ACTUALS = pd.DataFrame([
     {"company": "Test Co", "period": "Q1FY26", "metric": "ebitda_margin_pct", "value": 12.0, "source": "test"},
     {"company": "Test Co", "period": "Q2FY26", "metric": "ebitda_margin_pct", "value": 13.0, "source": "test"},
     {"company": "Test Co", "period": "Q2FY26", "metric": "nim_pct", "value": 3.45, "source": "test"},
+    {"company": "Test Co", "period": "Q2FY26", "metric": "gross_npa_pct", "value": 2.4, "source": "test"},
 ])
 
 
@@ -44,10 +47,25 @@ def test_point_uses_metric_tolerance():
 
 
 def test_direction_compares_to_reference_period():
+    # Margin went from 12.0 in Q1 to 13.0 in Q2
     up = make_guidance(type="direction", direction="up", reference_period="Q1FY26")
     down = make_guidance(type="direction", direction="down", reference_period="Q1FY26")
     assert score_one(up, ACTUALS)["verdict"] == "kept"
-    assert score_one(down, ACTUALS)["verdict"] == "missed"
+    # Said margins would fall, they rose: wrong forecast, but good news
+    assert score_one(down, ACTUALS)["verdict"] == "beat"
+    # Said Q1 would be up on Q2, it was down: a real miss
+    up_but_fell = make_guidance(type="direction", direction="up", target_period="Q1FY26", reference_period="Q2FY26")
+    assert score_one(up_but_fell, ACTUALS)["verdict"] == "missed"
+
+
+def test_beat_depends_on_which_way_is_good():
+    # Margin of 13.0 above a 11 to 12.5 range is a beat, below 14 to 15 is a miss
+    assert score_one(make_guidance(low=11, high=12.5), ACTUALS)["verdict"] == "beat"
+    assert score_one(make_guidance(low=14, high=15), ACTUALS)["verdict"] == "missed"
+    # For bad loans lower is better, so 2.4 under a 2.5 to 3 range is a beat
+    npa = make_guidance(metric="gross_npa_pct", low=2.5, high=3.0)
+    assert score_one(npa, ACTUALS)["verdict"] == "beat"
+    assert score_one(make_guidance(metric="gross_npa_pct", low=1.5, high=2.0), ACTUALS)["verdict"] == "missed"
 
 
 def test_unverified_quote_is_never_scored():
@@ -80,6 +98,56 @@ def test_incomplete_llm_record_is_flagged_not_crashed():
     assert score_one(make_guidance(low=12.5, high=None), ACTUALS)["verdict"] == "incomplete"
     assert score_one(make_guidance(type="point", value="13%"), ACTUALS)["verdict"] == "incomplete"
     assert score_one(make_guidance(type="direction", direction="flat", reference_period="Q1FY26"), ACTUALS)["verdict"] == "incomplete"
+
+
+def test_quote_matching_accepts_any_labeled_mention():
+    # The model quoted the CFO, the label quoted the CEO; same promise
+    gold = [make_guidance(quote="The new guidance is 2% to 3% growth in constant currency terms.",
+                          alt_quotes=["Hence, we have revised our revenue guidance to 2% to 3%."])]
+    predicted = [make_guidance(quote="Hence, we have revised our revenue guidance to 2% to 3%.")]
+    assert len(match_records(gold, predicted)) == 1
+
+
+def test_normalize_treats_curly_and_straight_quotes_alike():
+    assert normalize("financial year ’26 – strong") == normalize("Financial year '26 - strong")
+
+
+def test_repeated_promise_in_one_call_counts_once():
+    text = "Company: X\n\nCEO: Guidance is 1% to 3%. CFO: To repeat, guidance is 1% to 3%."
+    transcripts = [{"file": "x.txt", "text": text}]
+    first = make_guidance(id="a", quote="To repeat, guidance is 1% to 3%.", low=1, high=3.0)
+    second = make_guidance(id="b", quote="Guidance is 1% to 3%.", low=1.0, high=3)
+    vague = make_guidance(id="c", type="vague", metric=None)
+    kept = dedupe_within_call([first, second, vague, dict(vague, id="d")], transcripts)
+    # The earlier mention wins, and vague statements are never merged
+    assert [g["id"] for g in kept] == ["b", "c", "d"]
+
+
+SEC_HTML = """
+<P><B>Infosys Limited Earnings Conference Call</B></P><P><B>April 18, 2024</B></P>
+<P>CORPORATE PARTICIPANTS</P><P><B>Salil Parekh</B></P><P>Chief Executive Officer</P>
+<P>analystS</P><P><B>Ankur Rudra</B></P><P>JPMorgan</P>
+<TABLE><TR><TD><B>Moderator</B></TD></TR></TABLE><P>Welcome to the call.</P>
+<P><B>Salil
+Parekh</B></P><P>Our guidance for FY '25 is 1% to 3%.</P><P>Margins 20% to 22%.</P>
+"""
+
+
+def test_sec_transcript_parsing():
+    parsed = parse_transcript(SEC_HTML)
+    # No quarter in this title, so it comes from the call date
+    assert parsed["period"] == "Q4FY24" and parsed["date"] == "2024-04-18"
+    assert parsed["participants"]["Management"] == "Salil Parekh (Chief Executive Officer)"
+    assert parsed["participants"]["Others"] == "Ankur Rudra (JPMorgan)"
+    assert parsed["turns"] == [("Moderator", "Welcome to the call."),
+                               ("Salil Parekh", "Our guidance for FY '25 is 1% to 3%. Margins 20% to 22%.")]
+
+
+def test_period_from_call_date_uses_indian_fiscal_year():
+    assert period_from_date(2025, 7) == "Q1FY26"
+    assert period_from_date(2025, 10) == "Q2FY26"
+    assert period_from_date(2026, 1) == "Q3FY26"
+    assert period_from_date(2026, 4) == "Q4FY26"
 
 
 def test_parse_json_with_code_fence():

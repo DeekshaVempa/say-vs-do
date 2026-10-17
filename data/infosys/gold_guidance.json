@@ -1,0 +1,327 @@
+[
+  {
+    "id": "infosys_Q4FY24_1",
+    "company": "Infosys",
+    "call_period": "Q4FY24",
+    "source_file": "infosys_Q4FY24.txt",
+    "quote": "With that, our revenue growth guidance for FY '25 is 1% to 3% growth in constant currency.",
+    "alt_quotes": [
+      "we expect FY '25 growth to be 1% to 3% in constant currency terms."
+    ],
+    "metric": "revenue_growth_yoy_pct",
+    "type": "range",
+    "low": 1,
+    "high": 3,
+    "value": null,
+    "direction": null,
+    "target_period": "FY25",
+    "reference_period": null
+  },
+  {
+    "id": "infosys_Q4FY24_2",
+    "company": "Infosys",
+    "call_period": "Q4FY24",
+    "source_file": "infosys_Q4FY24.txt",
+    "quote": "Our operating margin guidance for FY '25 is 20% to 22%.",
+    "alt_quotes": [
+      "Our operating margin guidance for the year is 20% to 22%."
+    ],
+    "metric": "ebit_margin_pct",
+    "type": "range",
+    "low": 20,
+    "high": 22,
+    "value": null,
+    "direction": null,
+    "target_period": "FY25",
+    "reference_period": null
+  },
+  {
+    "id": "infosys_Q1FY25_1",
+    "company": "Infosys",
+    "call_period": "Q1FY25",
+    "source_file": "infosys_Q1FY25.txt",
+    "quote": "Given our strong performance in Q1 and our current outlook, we have revised our revenue growth guidance for the full financial year to 3% to 4% growth in constant currency.",
+    "alt_quotes": [
+      "we are increasing the revenue guidance to 3% to 4% in constant currency terms."
+    ],
+    "metric": "revenue_growth_yoy_pct",
+    "type": "range",
+    "low": 3,
+    "high": 4,
+    "value": null,
+    "direction": null,
+    "target_period": "FY25",
+    "reference_period": null
+  },
+  {
+    "id": "infosys_Q1FY25_2",
+    "company": "Infosys",
+    "call_period": "Q1FY25",
+    "source_file": "infosys_Q1FY25.txt",
+    "quote": "Our operating margin guidance for the financial year remains at 20% to 22%.",
+    "alt_quotes": [
+      "We are maintaining our operating margin guidance at 20% to 22%."
+    ],
+    "metric": "ebit_margin_pct",
+    "type": "range",
+    "low": 20,
+    "high": 22,
+    "value": null,
+    "direction": null,
+    "target_period": "FY25",
+    "reference_period": null
+  },
+  {
+    "id": "infosys_Q2FY25_1",
+    "company": "Infosys",
+    "call_period": "Q2FY25",
+    "source_file": "infosys_Q2FY25.txt",
+    "quote": "The new guidance is 3.75% to 4.5% growth in constant currency.",
+    "alt_quotes": [
+      "we are revising our FY25 revenue guidance to 3.75% to 4.5% in constant currency terms."
+    ],
+    "metric": "revenue_growth_yoy_pct",
+    "type": "range",
+    "low": 3.75,
+    "high": 4.5,
+    "value": null,
+    "direction": null,
+    "target_period": "FY25",
+    "reference_period": null
+  },
+  {
+    "id": "infosys_Q2FY25_2",
+    "company": "Infosys",
+    "call_period": "Q2FY25",
+    "source_file": "infosys_Q2FY25.txt",
+    "quote": "Our operating margin guidance for the financial year remains the same at 20% to 22%.",
+    "alt_quotes": [
+      "Our operating margin guidance remains at 20% to 22%."
+    ],
+    "metric": "ebit_margin_pct",
+    "type": "range",
+    "low": 20,
+    "high": 22,
+    "value": null,
+    "direction": null,
+    "target_period": "FY25",
+    "reference_period": null
+  },
+  {
+    "id": "infosys_Q3FY25_1",
+    "company": "Infosys",
+    "call_period": "Q3FY25",
+    "source_file": "infosys_Q3FY25.txt",
+    "quote": "we are revising our revenue growth guidance to growth of 4.5% to 5% in constant currency.",
+    "alt_quotes": [
+      "we are revising our FY'25 revenue guidance to 4.5% to 5% in constant currency terms."
+    ],
+    "metric": "revenue_growth_yoy_pct",
+    "type": "range",
+    "low": 4.5,
+    "high": 5,
+    "value": null,
+    "direction": null,
+    "target_period": "FY25",
+    "reference_period": null
+  },
+  {
+    "id": "infosys_Q3FY25_2",
+    "company": "Infosys",
+    "call_period": "Q3FY25",
+    "source_file": "infosys_Q3FY25.txt",
+    "quote": "Our operating margin guidance remains unchanged at 20% to 22%.",
+    "alt_quotes": [
+      "Our operating margin guidance remains at 20% to 22%."
+    ],
+    "metric": "ebit_margin_pct",
+    "type": "range",
+    "low": 20,
+    "high": 22,
+    "value": null,
+    "direction": null,
+    "target_period": "FY25",
+    "reference_period": null
+  },
+  {
+    "id": "infosys_Q4FY25_1",
+    "company": "Infosys",
+    "call_period": "Q4FY25",
+    "source_file": "infosys_Q4FY25.txt",
+    "quote": "our guidance for growth for financial year '26 is 0% to 3% in constant currency terms.",
+    "alt_quotes": [
+      "we expect FY'26 growth to be 0% to 3% in constant currency terms."
+    ],
+    "metric": "revenue_growth_yoy_pct",
+    "type": "range",
+    "low": 0,
+    "high": 3,
+    "value": null,
+    "direction": null,
+    "target_period": "FY26",
+    "reference_period": null
+  },
+  {
+    "id": "infosys_Q4FY25_2",
+    "company": "Infosys",
+    "call_period": "Q4FY25",
+    "source_file": "infosys_Q4FY25.txt",
+    "quote": "Our margin guidance for financial year 2026 is 20% to 22%.",
+    "alt_quotes": [
+      "Our operating margin guidance for the year is 20% to 22%."
+    ],
+    "metric": "ebit_margin_pct",
+    "type": "range",
+    "low": 20,
+    "high": 22,
+    "value": null,
+    "direction": null,
+    "target_period": "FY26",
+    "reference_period": null
+  },
+  {
+    "id": "infosys_Q1FY26_1",
+    "company": "Infosys",
+    "call_period": "Q1FY26",
+    "source_file": "infosys_Q1FY26.txt",
+    "quote": "From the earlier guidance of 0% to 3%, now it is 1% to 3% growth in constant currency terms.",
+    "alt_quotes": [
+      "we have revised our FY26 revenue guidance to 1% to 3% in constant currency terms."
+    ],
+    "metric": "revenue_growth_yoy_pct",
+    "type": "range",
+    "low": 1,
+    "high": 3,
+    "value": null,
+    "direction": null,
+    "target_period": "FY26",
+    "reference_period": null
+  },
+  {
+    "id": "infosys_Q1FY26_2",
+    "company": "Infosys",
+    "call_period": "Q1FY26",
+    "source_file": "infosys_Q1FY26.txt",
+    "quote": "Our margin guidance remains unchanged at 20% to 22%.",
+    "alt_quotes": [
+      "Our operating margin guidance for the year is 20% to 22%."
+    ],
+    "metric": "ebit_margin_pct",
+    "type": "range",
+    "low": 20,
+    "high": 22,
+    "value": null,
+    "direction": null,
+    "target_period": "FY26",
+    "reference_period": null
+  },
+  {
+    "id": "infosys_Q2FY26_1",
+    "company": "Infosys",
+    "call_period": "Q2FY26",
+    "source_file": "infosys_Q2FY26.txt",
+    "quote": "The new guidance is 2% to 3% growth in constant currency terms.",
+    "alt_quotes": [
+      "Hence, we have revised our revenue guidance to 2% to 3%.",
+      "the new guidance being 2% to 3% for the full financial year."
+    ],
+    "metric": "revenue_growth_yoy_pct",
+    "type": "range",
+    "low": 2,
+    "high": 3,
+    "value": null,
+    "direction": null,
+    "target_period": "FY26",
+    "reference_period": null
+  },
+  {
+    "id": "infosys_Q2FY26_2",
+    "company": "Infosys",
+    "call_period": "Q2FY26",
+    "source_file": "infosys_Q2FY26.txt",
+    "quote": "Our operating margin guidance for the financial year remains the same at 20% to 22%.",
+    "alt_quotes": [
+      "Our margin guidance remains at 20% to 22%."
+    ],
+    "metric": "ebit_margin_pct",
+    "type": "range",
+    "low": 20,
+    "high": 22,
+    "value": null,
+    "direction": null,
+    "target_period": "FY26",
+    "reference_period": null
+  },
+  {
+    "id": "infosys_Q3FY26_1",
+    "company": "Infosys",
+    "call_period": "Q3FY26",
+    "source_file": "infosys_Q3FY26.txt",
+    "quote": "The new revenue growth guidance for this financial year is 3% to 3.5% growth in constant currency.",
+    "alt_quotes": [
+      "enabled us to revise our revenue guidance for FY'26 upward to 3% to 3.5%."
+    ],
+    "metric": "revenue_growth_yoy_pct",
+    "type": "range",
+    "low": 3,
+    "high": 3.5,
+    "value": null,
+    "direction": null,
+    "target_period": "FY26",
+    "reference_period": null
+  },
+  {
+    "id": "infosys_Q3FY26_2",
+    "company": "Infosys",
+    "call_period": "Q3FY26",
+    "source_file": "infosys_Q3FY26.txt",
+    "quote": "Our operating margin guidance for the financial year remains the same at 20% to 22%.",
+    "alt_quotes": [
+      "Our operating margin guidance remains at 20% to 22%."
+    ],
+    "metric": "ebit_margin_pct",
+    "type": "range",
+    "low": 20,
+    "high": 22,
+    "value": null,
+    "direction": null,
+    "target_period": "FY26",
+    "reference_period": null
+  },
+  {
+    "id": "infosys_Q4FY26_1",
+    "company": "Infosys",
+    "call_period": "Q4FY26",
+    "source_file": "infosys_Q4FY26.txt",
+    "quote": "Our revenue growth guidance of financial year '27 is 1.5% to 3.5% year-on-year in constant currency terms.",
+    "alt_quotes": [
+      "We expect FY27 growth to be 1.5% to 3.5% in constant currency terms."
+    ],
+    "metric": "revenue_growth_yoy_pct",
+    "type": "range",
+    "low": 1.5,
+    "high": 3.5,
+    "value": null,
+    "direction": null,
+    "target_period": "FY27",
+    "reference_period": null
+  },
+  {
+    "id": "infosys_Q4FY26_2",
+    "company": "Infosys",
+    "call_period": "Q4FY26",
+    "source_file": "infosys_Q4FY26.txt",
+    "quote": "Our operating margin guidance for financial year '27 is 20% to 22%.",
+    "alt_quotes": [
+      "Our operating margins guidance for the year is 20% to 22%."
+    ],
+    "metric": "ebit_margin_pct",
+    "type": "range",
+    "low": 20,
+    "high": 22,
+    "value": null,
+    "direction": null,
+    "target_period": "FY27",
+    "reference_period": null
+  }
+]

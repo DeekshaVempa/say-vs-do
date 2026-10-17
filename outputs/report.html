@@ -37,11 +37,12 @@
   .dot { display: inline-block; width: 16px; height: 16px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
   .dot.kept { background: var(--kept); }
   .dot.missed { border: 2px solid var(--missed); }
+  .dot.beat { border: 4px solid var(--kept); }
   .dot.vague, .dot.no_data, .dot.unverified_quote, .dot.incomplete { width: 8px; height: 8px; background: var(--vague); }
   q { font: italic 400 1.05rem/1.45 "Newsreader", Georgia, serif; }
   .src { display: block; font-size: .75rem; color: var(--muted); margin-top: 4px; }
   .verdict { font-weight: 600; font-size: .9rem; }
-  .verdict.kept { color: var(--kept); }
+  .verdict.kept, .verdict.beat { color: var(--kept); }
   .verdict.missed { color: var(--missed); }
   .verdict.vague, .verdict.no_data, .verdict.unverified_quote, .verdict.incomplete { color: var(--muted); font-weight: 400; }
   .legend { font-size: .85rem; color: var(--muted); margin: 10px 0 0; }
@@ -64,34 +65,34 @@
         <tr>
           <th scope="row">Aravali Infotech</th>
           <td class="strip"><span class="dot vague" title="Q1FY26: We remain confident about the demand environment (vague)"></span><span class="dot kept" title="Q1FY26: we expect revenue growth for FY26 to be in the range of 6 to 8 percent in constant currency (kept)"></span><span class="dot kept" title="Q1FY26: EBIT margin for Q2 should be at least 21 percent (kept)"></span><span class="dot kept" title="Q2FY26: we are narrowing FY26 revenue growth guidance to 7 to 8 percent (kept)"></span><span class="dot kept" title="Q2FY26: margins in Q3 will dip slightly, but EBIT margin should stay above 20.5 percent (kept)"></span><span class="dot vague" title="Q3FY26: We expect our AI deal pipeline to keep getting stronger next year (vague)"></span><span class="dot kept" title="Q3FY26: We expect Q4 EBIT margin to recover from Q3 levels (kept)"></span><span class="dot kept" title="Q3FY26: we expect FY26 revenue growth to land around 7.5 percent in constant currency (kept)"></span></td>
-          <td>6 of 6</td>
+          <td>6 of 6<span class="src">0 beat, 0 missed</span></td>
           <td class="score" style="color:#2E7D5B">0.88</td>
           <td>+0.22 pp</td>
         </tr>
         <tr>
           <th scope="row">Sahyadri Cement</th>
-          <td class="strip"><span class="dot vague" title="Q1FY26: Pricing discipline in the south remains encouraging and we expect it to hold (vague)"></span><span class="dot missed" title="Q1FY26: Capacity utilization should be around 75 percent in Q2 (missed)"></span><span class="dot kept" title="Q1FY26: EBITDA margin for FY26 should be in the 18 to 20 percent band (kept)"></span><span class="dot kept" title="Q2FY26: Utilization will improve in Q3 after the monsoon (kept)"></span><span class="dot kept" title="Q3FY26: Q4 utilization should be at least 85 percent (kept)"></span><span class="dot missed" title="Q3FY26: Q4 EBITDA margin will be lower than Q3 (missed)"></span></td>
-          <td>3 of 5</td>
+          <td class="strip"><span class="dot vague" title="Q1FY26: Pricing discipline in the south remains encouraging and we expect it to hold (vague)"></span><span class="dot missed" title="Q1FY26: Capacity utilization should be around 75 percent in Q2 (missed)"></span><span class="dot kept" title="Q1FY26: EBITDA margin for FY26 should be in the 18 to 20 percent band (kept)"></span><span class="dot kept" title="Q2FY26: Utilization will improve in Q3 after the monsoon (kept)"></span><span class="dot kept" title="Q3FY26: Q4 utilization should be at least 85 percent (kept)"></span><span class="dot beat" title="Q3FY26: Q4 EBITDA margin will be lower than Q3 (beat)"></span></td>
+          <td>3 of 5<span class="src">1 beat, 1 missed</span></td>
           <td class="score" style="color:#B7862B">0.57</td>
           <td>-1.10 pp</td>
         </tr>
         <tr>
           <th scope="row">Konkan Bank</th>
           <td class="strip"><span class="dot missed" title="Q1FY26: For FY26, we are guiding for loan growth of 16 to 18 percent (missed)"></span><span class="dot kept" title="Q1FY26: gross NPA should come down below 2.5 percent by end of Q2 (kept)"></span><span class="dot missed" title="Q1FY26: NIM should be stable at around 3.6 percent for Q2 (missed)"></span><span class="dot kept" title="Q2FY26: Loan growth for FY26 will now be around 15 percent (kept)"></span><span class="dot kept" title="Q2FY26: we see gross NPA improving further in Q3 (kept)"></span><span class="dot vague" title="Q3FY26: Asset quality trends remain healthy and we expect them to stay that way (vague)"></span><span class="dot missed" title="Q3FY26: NIM for Q4 should be at least 3.5 percent (missed)"></span></td>
-          <td>3 of 6</td>
+          <td>3 of 6<span class="src">0 beat, 3 missed</span></td>
           <td class="score" style="color:#B7862B">0.50</td>
           <td>-0.46 pp</td>
         </tr>
         <tr>
           <th scope="row">Deccan Motors</th>
           <td class="strip"><span class="dot vague" title="Q1FY26: The new EV platform will be a game changer for us (vague)"></span><span class="dot missed" title="Q1FY26: We are targeting double-digit volume growth for FY26, at least 12 percent (missed)"></span><span class="dot missed" title="Q1FY26: EBITDA margin in Q2 should expand to 13 percent (missed)"></span><span class="dot missed" title="Q2FY26: the festive season will drive Q3 volume growth of 15 to 18 percent (missed)"></span><span class="dot kept" title="Q2FY26: Margins will improve in Q3 from Q2 levels (kept)"></span><span class="dot missed" title="Q3FY26: We still believe FY26 volume growth will be at least 10 percent (missed)"></span><span class="dot missed" title="Q3FY26: Q4 EBITDA margin should be in the 12.5 to 13.5 percent range (missed)"></span></td>
-          <td>1 of 6</td>
+          <td>1 of 6<span class="src">0 beat, 5 missed</span></td>
           <td class="score" style="color:#C2452D">0.25</td>
           <td>-3.20 pp</td>
         </tr></tbody>
   </table>
   </div>
-  <p class="legend"><span class="dot kept"></span>Kept <span class="dot missed"></span>Missed <span class="dot vague"></span>Not measurable. Hover a dot to read the quote.</p>
+  <p class="legend"><span class="dot kept"></span>Kept <span class="dot beat"></span>Beat (missed, but on the good side) <span class="dot missed"></span>Missed <span class="dot vague"></span>Not measurable. Hover a dot to read the quote.</p>
 
   <h2>Every promise, with its source</h2>
   
@@ -220,7 +221,7 @@
               <td>Q4FY26</td>
               <td>lower than Q3FY26 (19.4%)</td>
               <td>19.9%<span class="src">Q4FY26 results release (synthetic)</span></td>
-              <td><span class="verdict missed">Missed</span></td>
+              <td><span class="verdict beat">Beat</span></td>
             </tr></tbody>
         </table>
         </div>

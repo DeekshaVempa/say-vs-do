@@ -1,0 +1,58 @@
+{
+  "gold_statements": 18,
+  "predicted_statements": 69,
+  "matched": 18,
+  "recall": 1.0,
+  "precision": 0.26,
+  "fully_correct_records": 18,
+  "field_accuracy": {
+    "metric": 1.0,
+    "type": 1.0,
+    "target_period": 1.0,
+    "low": 1.0,
+    "high": 1.0,
+    "value": 1.0,
+    "direction": 1.0,
+    "reference_period": 1.0
+  },
+  "measurable_only": {
+    "gold_statements": 18,
+    "predicted_statements": 21,
+    "matched": 18,
+    "recall": 1.0,
+    "precision": 0.86,
+    "fully_correct_records": 18,
+    "field_accuracy": {
+      "metric": 1.0,
+      "type": 1.0,
+      "target_period": 1.0,
+      "low": 1.0,
+      "high": 1.0,
+      "value": 1.0,
+      "direction": 1.0,
+      "reference_period": 1.0
+    },
+    "field_errors": [],
+    "labeled_but_not_found": [],
+    "found_but_not_labeled": [
+      "At this point in time, as I said earlier, in the press also, our aspiration remains to improve margin from where we are.",
+      "But our endeavor continues to improve operating margin in the midterm.",
+      "We expect Project Maximus to further aid in margin improvements from current levels."
+    ]
+  },
+  "duplicates_removed": 1,
+  "quote_verified_rate": 0.99,
+  "json_parse_failures": 0,
+  "truncated_responses": 0,
+  "avg_latency_s": 4.04,
+  "input_tokens": 146919,
+  "output_tokens": 6398,
+  "estimated_cost_usd": 0.3578,
+  "score_comparison": [
+    {
+      "company": "Infosys",
+      "credibility_score_gold": 0.61,
+      "credibility_score_llm": 0.55
+    }
+  ]
+}

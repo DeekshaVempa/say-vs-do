@@ -29,9 +29,15 @@ def same_value(a, b):
     return str(a).strip().lower() == str(b).strip().lower()
 
 
+def is_measurable(record):
+    return record.get("type") != "vague" and bool(record.get("metric"))
+
+
 def match_records(gold, predicted):
     # Greedy matching inside each transcript: for every gold statement,
-    # take the most similar unused prediction from the same file.
+    # take the most similar unused prediction from the same file. On a real
+    # call the same promise is said by the CEO and again by the CFO, so the
+    # labels can list those other sentences and any of them counts.
     used = set()
     pairs = []
     for g in gold:
@@ -39,7 +45,7 @@ def match_records(gold, predicted):
         for i, p in enumerate(predicted):
             if i in used or p.get("source_file") != g["source_file"]:
                 continue
-            score = quote_similarity(g["quote"], p.get("quote", ""))
+            score = max(quote_similarity(q, p.get("quote", "")) for q in [g["quote"], *g.get("alt_quotes", [])])
             if score > best_score:
                 best_index, best_score = i, score
         if best_index is not None and best_score >= MATCH_THRESHOLD:
@@ -48,25 +54,26 @@ def match_records(gold, predicted):
     return pairs
 
 
-def evaluate_extraction(gold, predicted, run_stats):
+def compare(gold, predicted):
     pairs = match_records(gold, predicted)
 
     field_correct = {field: 0 for field in FIELDS_TO_CHECK}
     fully_correct = 0
+    field_errors = []
     for g, p in pairs:
-        all_ok = True
+        wrong = [f for f in FIELDS_TO_CHECK if not same_value(g.get(f), p.get(f))]
         for field in FIELDS_TO_CHECK:
-            if same_value(g.get(field), p.get(field)):
+            if field not in wrong:
                 field_correct[field] += 1
-            else:
-                all_ok = False
-        if all_ok:
+        if wrong:
+            field_errors.append({"id": g["id"], "quote": g["quote"],
+                                 "fields": {f: {"label": g.get(f), "model": p.get(f)} for f in wrong}})
+        else:
             fully_correct += 1
 
     matched = len(pairs)
-    input_tokens, output_tokens, cost = estimate_cost(run_stats)
-    latencies = [s["latency_s"] for s in run_stats]
-
+    matched_gold = {id(g) for g, _ in pairs}
+    matched_pred = {id(p) for _, p in pairs}
     return {
         "gold_statements": len(gold),
         "predicted_statements": len(predicted),
@@ -75,6 +82,28 @@ def evaluate_extraction(gold, predicted, run_stats):
         "precision": round(matched / len(predicted), 2) if predicted else None,
         "fully_correct_records": fully_correct,
         "field_accuracy": {f: round(c / matched, 2) if matched else None for f, c in field_correct.items()},
+        # The actual failure cases, so the numbers above can be explained
+        "field_errors": field_errors,
+        "labeled_but_not_found": [g["quote"] for g in gold if id(g) not in matched_gold],
+        "found_but_not_labeled": [p.get("quote") for p in predicted if id(p) not in matched_pred],
+    }
+
+
+def evaluate_extraction(gold, predicted, run_stats, duplicates_removed=0):
+    input_tokens, output_tokens, cost = estimate_cost(run_stats)
+    latencies = [s["latency_s"] for s in run_stats]
+
+    overall = compare(gold, predicted)
+    # Real transcripts are full of vague talk about demand and deal pipelines.
+    # The scores only use measurable promises, so that is the number to watch.
+    measurable = compare([g for g in gold if is_measurable(g)], [p for p in predicted if is_measurable(p)])
+    for detail in ("field_errors", "labeled_but_not_found", "found_but_not_labeled"):
+        overall.pop(detail)
+
+    return {
+        **overall,
+        "measurable_only": measurable,
+        "duplicates_removed": duplicates_removed,
         "quote_verified_rate": round(
             sum(1 for p in predicted if p.get("quote_verified")) / len(predicted), 2
         ) if predicted else None,

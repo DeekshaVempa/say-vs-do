@@ -9,8 +9,6 @@ ROOT = Path(__file__).parent
 DATA_DIR = ROOT / "data"
 TRANSCRIPT_DIR = DATA_DIR / "transcripts"
 ACTUALS_PATH = DATA_DIR / "actuals.csv"
-GOLD_PATH = DATA_DIR / "gold_guidance.json"
-LLM_OUTPUT_PATH = DATA_DIR / "llm_guidance.json"
 OUTPUT_DIR = ROOT / "outputs"
 
 # The only metrics we know how to score. The LLM is told to use exactly these

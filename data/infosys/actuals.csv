@@ -1,0 +1,5 @@
+company,period,metric,value,source,source_url
+Infosys,FY25,revenue_growth_yoy_pct,4.2,"Q4 FY25 press release, revenue growth in constant currency",https://www.sec.gov/Archives/edgar/data/1067491/000106749125000010/exv99w01.htm
+Infosys,FY25,ebit_margin_pct,21.1,"Q4 FY25 press release, operating margin",https://www.sec.gov/Archives/edgar/data/1067491/000106749125000010/exv99w01.htm
+Infosys,FY26,revenue_growth_yoy_pct,3.1,"Q4 FY26 press release, revenue growth in constant currency",https://www.sec.gov/Archives/edgar/data/1067491/000106749126000018/exv99w01.htm
+Infosys,FY26,ebit_margin_pct,21.0,"Q4 FY26 press release, adjusted operating margin (excludes the one-time Labour Code charge, as the guidance did; reported 20.3%)",https://www.sec.gov/Archives/edgar/data/1067491/000106749126000018/exv99w01.htm

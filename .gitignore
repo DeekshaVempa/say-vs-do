@@ -2,3 +2,8 @@ __pycache__/
 .pytest_cache/
 .env
 .DS_Store
+.venv/
+
+# Infosys's transcripts are its own text, so they aren't republished here.
+# python fetch.py downloads them from the SEC filings.
+data/infosys/transcripts/

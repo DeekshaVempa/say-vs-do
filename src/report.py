@@ -31,6 +31,8 @@ def save_chart(board, path):
 
     for bar, (_, row) in zip(bars, board.iterrows()):
         label = f"  {row['kept']} of {row['promises_scored']} kept"
+        if row["beat"]:
+            label += f", {row['beat']} beat"
         ax.text(bar.get_width(), bar.get_y() + bar.get_height() / 2, label,
                 va="center", fontsize=10, color="#333333")
 
@@ -60,6 +62,7 @@ def promise_strip(group):
 def verdict_text(verdict):
     return {
         "kept": "Kept",
+        "beat": "Beat",
         "missed": "Missed",
         "vague": "Not measurable",
         "no_data": "No reported data",
@@ -74,7 +77,7 @@ def fmt(value, suffix=""):
     return f"{value}{suffix}"
 
 
-def save_html(board, scored, path, source_label):
+def save_html(board, scored, path, source_label, data_note):
     scored = scored.sort_values(["company", "call_period"])
 
     board_rows = []
@@ -86,7 +89,7 @@ def save_html(board, scored, path, source_label):
         <tr>
           <th scope="row">{escape(row['company'])}</th>
           <td class="strip">{promise_strip(group)}</td>
-          <td>{row['kept']} of {row['promises_scored']}</td>
+          <td>{row['kept']} of {row['promises_scored']}<span class="src">{row['beat']} beat, {row['missed']} missed</span></td>
           <td class="score" style="color:{score_color(row['credibility_score'])}">{row['credibility_score']:.2f}</td>
           <td>{gap_text}</td>
         </tr>""")
@@ -159,11 +162,12 @@ def save_html(board, scored, path, source_label):
   .dot {{ display: inline-block; width: 16px; height: 16px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }}
   .dot.kept {{ background: var(--kept); }}
   .dot.missed {{ border: 2px solid var(--missed); }}
+  .dot.beat {{ border: 4px solid var(--kept); }}
   .dot.vague, .dot.no_data, .dot.unverified_quote, .dot.incomplete {{ width: 8px; height: 8px; background: var(--vague); }}
   q {{ font: italic 400 1.05rem/1.45 "Newsreader", Georgia, serif; }}
   .src {{ display: block; font-size: .75rem; color: var(--muted); margin-top: 4px; }}
   .verdict {{ font-weight: 600; font-size: .9rem; }}
-  .verdict.kept {{ color: var(--kept); }}
+  .verdict.kept, .verdict.beat {{ color: var(--kept); }}
   .verdict.missed {{ color: var(--missed); }}
   .verdict.vague, .verdict.no_data, .verdict.unverified_quote, .verdict.incomplete {{ color: var(--muted); font-weight: 400; }}
   .legend {{ font-size: .85rem; color: var(--muted); margin: 10px 0 0; }}
@@ -176,7 +180,7 @@ def save_html(board, scored, path, source_label):
   <h1>Who keeps their word?</h1>
   <p class="lede">Every forward-looking promise management made on an earnings call, checked against what the company reported later.
   The credibility score is the share of measurable promises kept, smoothed so that a company with only a few promises does not look perfect by luck.</p>
-  <p class="note">Guidance source: {escape(source_label)}. Companies, transcripts and results are synthetic, built to demonstrate the method.</p>
+  <p class="note">Guidance source: {escape(source_label)}. {escape(data_note)}</p>
 
   <h2>Scoreboard</h2>
   <div class="scroll">
@@ -185,7 +189,7 @@ def save_html(board, scored, path, source_label):
     <tbody>{''.join(board_rows)}</tbody>
   </table>
   </div>
-  <p class="legend"><span class="dot kept"></span>Kept <span class="dot missed"></span>Missed <span class="dot vague"></span>Not measurable. Hover a dot to read the quote.</p>
+  <p class="legend"><span class="dot kept"></span>Kept <span class="dot beat"></span>Beat (missed, but on the good side) <span class="dot missed"></span>Missed <span class="dot vague"></span>Not measurable. Hover a dot to read the quote.</p>
 
   <h2>Every promise, with its source</h2>
   {''.join(detail_sections)}
