@@ -58,6 +58,7 @@ A promise that isn't kept but lands on the good side, like growth above the top 
 
 - `raw_score` is kept / scored, where scored is kept + beat + missed.
 - `credibility_score` is (kept + 1) / (scored + 2), which is Laplace smoothing. With five or six promises per company, a team that kept 1 of 1 shouldn't rank alongside one that kept 6 of 6, so small samples get pulled toward 50%.
+- `delivery_score` is the same, but counts a beat as delivered: (kept + beat + 1) / (scored + 2). Credibility asks whether management's numbers were accurate; delivery asks whether management delivered at least what it promised. A company that guides cautiously scores low on the first and high on the second.
 - `avg_gap_pp` is the average distance between the reported number and the promised target, in percentage points. Positive means the company tends to beat its own guidance. For gross NPA, where lower is better, the sign is flipped. Direction promises have no numeric target, so they're left out of this.
 
 The tolerances, the lower-is-better list and the metric list are all in `config.py`, so changing a methodology choice doesn't mean digging through the scoring code.
@@ -66,12 +67,12 @@ The tolerances, the lower-is-better list and the metric list are all in `config.
 
 12 synthetic transcripts (4 companies, Q1 to Q3 FY26 calls), scored against FY26 reported results:
 
-| Company | Kept | Raw score | Credibility | Avg gap vs target |
-|---|---|---|---|---|
-| Aravali Infotech | 6 of 6 | 1.00 | 0.88 | +0.22 pp |
-| Sahyadri Cement | 3 of 5 | 0.60 | 0.57 | -1.10 pp |
-| Konkan Bank | 3 of 6 | 0.50 | 0.50 | -0.46 pp |
-| Deccan Motors | 1 of 6 | 0.17 | 0.25 | -3.20 pp |
+| Company | Kept | Raw score | Credibility | Delivery | Avg gap vs target |
+|---|---|---|---|---|---|
+| Aravali Infotech | 6 of 6 | 1.00 | 0.88 | 0.88 | +0.22 pp |
+| Sahyadri Cement | 3 of 5 (1 beat) | 0.60 | 0.57 | 0.71 | -1.10 pp |
+| Konkan Bank | 3 of 6 | 0.50 | 0.50 | 0.50 | -0.46 pp |
+| Deccan Motors | 1 of 6 | 0.17 | 0.25 | 0.25 | -3.20 pp |
 
 What I'd take from it:
 
@@ -157,12 +158,12 @@ To see how the method holds up on data I didn't design, I ran it on one real com
 | FY25 and FY26 operating margin | all 8 calls | 20 to 22% | 21.1%, 21.0% | kept, 8 of 8 |
 | FY27 revenue and margin | Apr 2026 | 1.5 to 3.5%, 20 to 22% | not reported yet | pending |
 
-Overall: 10 kept, 5 beat, 1 missed and 2 pending, for a credibility score of 0.61 and an average gap of +0.37 pp.
+Overall: 10 kept, 5 beat, 1 missed and 2 pending, for a credibility score of 0.61, a delivery score of 0.89 and an average gap of +0.37 pp.
 
 What it showed:
 
 - **Infosys guides low and raises.** Five of its six misses were beats. It started each year with a cautious range, raised it as the year went on, and still finished above most of them. The one real miss was January 2025, when it guided 4.5 to 5% with one quarter left and FY25 came in at 4.2%. Before I added the beat verdict, all six counted as plain misses, which would have told a user the opposite of what happened. That's the main change real data forced.
-- **0.61 measures accuracy, not reliability.** Infosys landed where it said 10 times out of 16, but fell short only once. A user probably wants both numbers, and the report now shows both.
+- **0.61 measures accuracy, not reliability.** Infosys landed where it said 10 times out of 16, but fell short only once. That's why there's a second score: counting beats as delivered gives 0.89. Read together, 0.61 and 0.89 say "cautious, but dependable", which neither number says on its own.
 - **A wide band is easy to keep.** The margin band was 20 to 22% on all 8 calls and was kept every time. That's a 2-point band that never moved, compared with a 0.5-point revenue range in January 2026. The score treats them the same, which flatters the margin promises.
 
 **What had to change in the code.** The prompt and model call didn't change. The plumbing did:
@@ -187,6 +188,7 @@ Same model, same effort and the same prompt as the synthetic run. I didn't chang
 | Average latency | 4.0 s per transcript |
 | Cost for all 9 transcripts | about $0.36 (147K input, 6.4K output tokens) |
 | Credibility score | 0.55 from the model's records, 0.61 from the hand labels |
+| Delivery score | 0.80 from the model's records, 0.89 from the hand labels |
 
 The full numbers are in `outputs/infosys/extraction_eval.json` and the model's records are in `data/infosys/llm_guidance.json`.
 
@@ -212,7 +214,7 @@ The fix I'd try is telling the model to use "direction" only when management nam
 - Sample size. Five or six promises per company is enough to show the idea, not to judge a management team. Smoothing helps but doesn't fix it.
 - Vague guidance isn't scored, so a team that never commits to a number can never miss. The report counts vague statements so it's visible, but a team that's always vague probably deserves a lower score, not a neutral one.
 - Guidance repeated on later calls counts each time. Aravali's FY26 revenue guide shows up on all three calls (6 to 8%, then 7 to 8%, then around 7.5%) and gets scored three times against the same 7.4%, and Infosys's margin band is scored eight times. Repeats within one call are counted once, but whether a target reiterated across calls should count once or every time is still an open methodology question.
-- A beat counts against the credibility score. That's deliberate, since the forecast was wrong, but it means a company like Infosys that habitually guides low scores 0.61 with only one real miss. The report shows both, and a product would probably need to as well.
+- A beat counts against the credibility score. That's deliberate, since the forecast was wrong, but it means a company like Infosys that habitually guides low scores 0.61 with only one real miss. The delivery score (0.89) covers the other reading, and a product would probably need to show both.
 - How tight a promise was isn't taken into account. Keeping a 2-point margin band is much easier than keeping a 0.5-point revenue range.
 - Not all misses are equal. Missing because of an unusual monsoon is different from a plan that was never realistic, and the score can't tell them apart.
 - The gap average mixes metrics. A 1pp miss on NIM is a much bigger deal than a 1pp miss on loan growth. Fine as a rough signal, not for ranking.

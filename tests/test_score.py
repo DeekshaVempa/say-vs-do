@@ -86,6 +86,17 @@ def test_smoothing_ranks_small_samples_lower():
     assert list(board["company"]) == ["Six", "One"]
 
 
+def test_beat_counts_for_delivery_but_not_credibility():
+    scored = pd.DataFrame([
+        {"company": "X", "verdict": "kept", "gap_pp": 0.0},
+        {"company": "X", "verdict": "beat", "gap_pp": 1.0},
+        {"company": "X", "verdict": "missed", "gap_pp": -1.0},
+    ])
+    row = company_scoreboard(scored).iloc[0]
+    assert row["credibility_score"] == round((1 + 1) / (3 + 2), 2)   # only the kept one
+    assert row["delivery_score"] == round((2 + 1) / (3 + 2), 2)      # kept and beat
+
+
 def test_quote_matching_handles_trimmed_quotes():
     gold = [make_guidance(quote="EBIT margin for Q2 should be at least 21 percent")]
     predicted = [make_guidance(quote="so EBIT margin for Q2 should be at least 21 percent.")]

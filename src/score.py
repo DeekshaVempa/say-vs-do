@@ -193,6 +193,11 @@ def company_scoreboard(scored):
             "incomplete": int((group["verdict"] == "incomplete").sum()),
             "raw_score": round(kept / scorable, 2) if scorable else None,
             "credibility_score": round(adjusted, 2),
+            # Same smoothing, but a beat counts as delivered. Credibility asks
+            # "were the numbers accurate?", delivery asks "did they deliver at
+            # least what they promised?". A cautious guider scores low on the
+            # first and high on the second.
+            "delivery_score": round((kept + beat + 1) / (scorable + 2), 2),
             "avg_gap_pp": round(gaps.mean(), 2) if len(gaps) else None,
         })
 

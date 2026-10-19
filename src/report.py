@@ -91,6 +91,7 @@ def save_html(board, scored, path, source_label, data_note):
           <td class="strip">{promise_strip(group)}</td>
           <td>{row['kept']} of {row['promises_scored']}<span class="src">{row['beat']} beat, {row['missed']} missed</span></td>
           <td class="score" style="color:{score_color(row['credibility_score'])}">{row['credibility_score']:.2f}</td>
+          <td class="score" style="color:{score_color(row['delivery_score'])}">{row['delivery_score']:.2f}</td>
           <td>{gap_text}</td>
         </tr>""")
 
@@ -179,13 +180,14 @@ def save_html(board, scored, path, source_label, data_note):
 <main>
   <h1>Who keeps their word?</h1>
   <p class="lede">Every forward-looking promise management made on an earnings call, checked against what the company reported later.
-  The credibility score is the share of measurable promises kept, smoothed so that a company with only a few promises does not look perfect by luck.</p>
+  The credibility score is the share of measurable promises kept, smoothed so that a company with only a few promises does not look perfect by luck.
+  The delivery score is the same, but also counts a beat (doing better than promised) as delivered.</p>
   <p class="note">Guidance source: {escape(source_label)}. {escape(data_note)}</p>
 
   <h2>Scoreboard</h2>
   <div class="scroll">
   <table class="board">
-    <thead><tr><th>Company</th><th>Promises in call order</th><th>Kept</th><th>Credibility</th><th>Avg gap vs target</th></tr></thead>
+    <thead><tr><th>Company</th><th>Promises in call order</th><th>Kept</th><th>Credibility</th><th>Delivery</th><th>Avg gap vs target</th></tr></thead>
     <tbody>{''.join(board_rows)}</tbody>
   </table>
   </div>
